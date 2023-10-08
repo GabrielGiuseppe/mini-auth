@@ -1,10 +1,12 @@
 package com.vr.miniauth.utils;
 
+import static com.vr.miniauth.utils.ProjectConstants.CARD_NUMBER_MASK;
+import static com.vr.miniauth.utils.ProjectConstants.CARD_NUMBER_REMOVABLE_CHARACTER;
+import static com.vr.miniauth.utils.ProjectConstants.CARD_NUMBER_REPLACEMENT_CHARACTER;
+
 public abstract class MaskUtils {
 
-    private static final String CARD_NUMBER_MASK = "%s.%s.%s.%s";
-    private static final String CARD_NUMBER_REMOVABLE_CHARACTER = ".";
-    private static final String CARD_NUMBER_REPLACEMENT_CHARACTER = ".";
+
 
     public static String applyCardNumberMask(String cardNumber){
         return String.format(CARD_NUMBER_MASK,

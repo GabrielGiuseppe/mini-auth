@@ -3,7 +3,6 @@ package com.vr.miniauth.controller;
 import com.vr.miniauth.common.controller.BaseController;
 import com.vr.miniauth.common.response.BaseReturn;
 import com.vr.miniauth.request.TransactionRequest;
-import com.vr.miniauth.response.TransactionResponse;
 import com.vr.miniauth.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

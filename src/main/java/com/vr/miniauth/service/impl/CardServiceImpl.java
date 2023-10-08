@@ -16,9 +16,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+import static com.vr.miniauth.utils.IntegrityUtils.*;
 import static com.vr.miniauth.utils.IntegrityUtils.isNumberRightSize;
 import static com.vr.miniauth.utils.MaskUtils.applyCardNumberMask;
-import static com.vr.miniauth.utils.ProjectConstants.CARD_NOT_FOUND_ERROR;
+import static com.vr.miniauth.utils.ProjectConstants.CARD_NOT_FOUND;
 import static com.vr.miniauth.utils.ProjectConstants.CARD_NUMBER_ALREADY_REGISTERED;
 
 @Service
@@ -30,7 +31,7 @@ public class CardServiceImpl implements CardService {
     @Override
     public BaseReturn<CardResponse> create(CardRequest request) {
         isNumberRightSize(request.getCardNumber());
-        IntegrityUtils.isPasswordValid(request.getPassword());
+        isPasswordValid(request.getPassword());
         repository.getByNumber(applyCardNumberMask(request.getCardNumber())).ifPresent(model -> {
             throw new BaseException(HttpStatus.UNPROCESSABLE_ENTITY, CARD_NUMBER_ALREADY_REGISTERED);
         });
@@ -52,7 +53,7 @@ public class CardServiceImpl implements CardService {
         var wrapper = new Object() {Card card = new Card();};
         repository.getByNumber(applyCardNumberMask(cardNumber))
                 .ifPresentOrElse(model -> wrapper.card = model,
-                        () -> {throw new BaseException(HttpStatus.NOT_FOUND, CARD_NOT_FOUND_ERROR);});
+                        () -> {throw new BaseException(HttpStatus.NOT_FOUND, CARD_NOT_FOUND);});
         return wrapper.card;
     }
 
