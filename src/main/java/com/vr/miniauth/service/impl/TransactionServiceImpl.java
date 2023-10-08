@@ -28,6 +28,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Transactional
     public BaseReturn<String> approveTransaction(TransactionRequest request) {
         IntegrityUtils.isNumberRightSize(request.getCardNumber());
+        IntegrityUtils.isPasswordValid(request.getPassword());
         var cardModel = cardService.getCard(request.getCardNumber());
         cardModel = verifyPassword(cardModel, request.getPassword());
         final var updatedModel = verifyBalance(cardModel, request.getValue());
