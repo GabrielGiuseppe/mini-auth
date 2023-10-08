@@ -1,7 +1,7 @@
 create table card
 (
     id       INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    number   BIGINT       NOT NULL,
+    number   VARCHAR(19)  NOT NULL,
     password VARCHAR(100) NOT NULL,
-    balance  BIGINT       NOT NULL
+    balance  FLOAT       NOT NULL
 )
